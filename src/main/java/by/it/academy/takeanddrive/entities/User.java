@@ -1,25 +1,32 @@
 package by.it.academy.takeanddrive.entities;
 
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
+import javax.persistence.*;
 
 @Data
+@Builder
 @Entity
-@Table(name="USERS")
+@Table(name = "USERS")
+@DynamicInsert
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
-    private int id;
+    private Integer id;
     @Column(name = "FIRSTNAME")
     private String firstName;
     @Column(name = "LASTNAME")
     private String lastName;
     @Column(name = "AGE")
-    private int age;
+    private Integer age;
     @Column(name = "LOGIN")
     private String login;
     @Column(name = "PASSWORD")
@@ -28,12 +35,4 @@ public class User {
     @Column(name = "ROLE")
     @ColumnDefault("USER")
     private Role role;
-
-    public User(String firstName, String lastName, int age, String login, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.login = login;
-        this.password = password;
-    }
 }
