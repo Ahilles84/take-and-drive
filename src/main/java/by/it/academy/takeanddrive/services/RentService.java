@@ -7,5 +7,6 @@ public interface RentService {
     void releaseCar(Integer carId);
 
     void rentCarByUser(Integer carId, String userLogin);
+
     RentalAgreementResponse makeRentalAgreement(RentalAgreementRequest rentalAgreementRequest);
 }
