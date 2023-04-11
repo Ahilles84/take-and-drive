@@ -8,9 +8,12 @@ import java.util.List;
 
 public interface UserService {
     List<UserResponse> getAllUsers(Pageable pageable);
+
     UserResponse getUserByLogin(String login);
-    UserResponse getUserByLoginAndPassword(String login, String password);
+
     UserResponse createUser(UserRequest userRequest);
+
     void deleteUser(String login);
+
     boolean isLoginExist(String login);
 }

@@ -12,7 +12,7 @@ public class CarResponse {
     private Integer id;
     private String model;
     private String registrationNumber;
-    private boolean status;
+    private boolean carBusy;
     private BigDecimal rentalPrice;
     private User user;
 }

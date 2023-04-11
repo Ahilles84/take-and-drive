@@ -1,5 +1,6 @@
 package by.it.academy.takeanddrive.entities;
 
+import by.it.academy.takeanddrive.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +11,8 @@ import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 
 @Data
-@Builder
 @Entity
+@Builder
 @Table(name = "USERS")
 @DynamicInsert
 @NoArgsConstructor
@@ -21,15 +22,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
     private Integer id;
-    @Column(name = "FIRSTNAME")
+    @Column(name = "FIRSTNAME", nullable = false, length = 50)
     private String firstName;
-    @Column(name = "LASTNAME")
+    @Column(name = "LASTNAME", nullable = false, length = 50)
     private String lastName;
-    @Column(name = "AGE")
+    @Column(name = "AGE", nullable = false)
     private Integer age;
-    @Column(name = "LOGIN")
+    @Column(name = "LOGIN", nullable = false, length = 100)
     private String login;
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false, length = 100)
     private String password;
     @Enumerated(EnumType.STRING)
     @Column(name = "ROLE")

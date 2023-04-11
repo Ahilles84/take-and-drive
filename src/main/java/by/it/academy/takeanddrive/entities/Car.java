@@ -22,20 +22,16 @@ public class Car {
     @Column(name = "CAR_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "MODEL")
+    @Column(name = "MODEL", nullable = false, length = 50)
     private String model;
-    @Column(name = "NUMBER")
+    @Column(name = "NUMBER", nullable = false, length = 20)
     private String registrationNumber;
-    @Column(name = "STATUS")
+    @Column(name = "CAR_IS_BUSY", nullable = false)
     @ColumnDefault("false")
-    private boolean status;
-    @Column(name = "RENTAL_PRICE")
+    private boolean carBusy;
+    @Column(name = "RENTAL_PRICE", nullable = false)
     private BigDecimal rentalPrice;
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
-
-    public boolean isBusy() {
-        return status;
-    }
 }

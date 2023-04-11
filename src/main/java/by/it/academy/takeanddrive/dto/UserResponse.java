@@ -1,6 +1,6 @@
 package by.it.academy.takeanddrive.dto;
 
-import by.it.academy.takeanddrive.entities.Role;
+import by.it.academy.takeanddrive.enums.Role;
 import lombok.Builder;
 import lombok.Data;
 
