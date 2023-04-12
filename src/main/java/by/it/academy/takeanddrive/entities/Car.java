@@ -28,7 +28,7 @@ public class Car {
     private String registrationNumber;
     @Column(name = "CAR_IS_BUSY", nullable = false)
     @ColumnDefault("false")
-    private boolean carBusy;
+    private boolean busy;
     @Column(name = "RENTAL_PRICE", nullable = false)
     private BigDecimal rentalPrice;
     @ManyToOne

@@ -9,5 +9,4 @@ public class TakeAndDriveApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TakeAndDriveApplication.class, args);
 	}
-
 }

@@ -4,8 +4,11 @@ import by.it.academy.takeanddrive.dto.RentalAgreementRequest;
 import by.it.academy.takeanddrive.dto.RentalAgreementResponse;
 import by.it.academy.takeanddrive.services.RentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("rent")
@@ -18,8 +21,8 @@ public class RentController {
         return rentService.makeRentalAgreement(rentalAgreementRequest);
     }
 
-    @PostMapping("{carId}/{userLogin}")
-    public void rentCar(@PathVariable Integer carId, @PathVariable String userLogin) {
-        rentService.rentCarByUser(carId, userLogin);
+    @GetMapping
+    public List<RentalAgreementResponse> readAllRentalAgreements(Pageable pageable) {
+        return rentService.getAllAgreements(pageable);
     }
 }

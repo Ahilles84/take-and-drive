@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
         if (optionalCar.isPresent()) {
             Car car = optionalCar.get();
             car.setUser(null);
-            car.setCarBusy(false);
+            car.setBusy(false);
         }
     }
 }

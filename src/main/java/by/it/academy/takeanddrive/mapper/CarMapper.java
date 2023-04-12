@@ -12,7 +12,7 @@ public class CarMapper {
                 .id(car.getId())
                 .model(car.getModel())
                 .registrationNumber(car.getRegistrationNumber())
-                .carBusy(car.isCarBusy())
+                .busy(car.isBusy())
                 .rentalPrice(car.getRentalPrice())
                 .user(car.getUser())
                 .build();
