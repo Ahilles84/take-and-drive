@@ -14,17 +14,19 @@ import javax.persistence.EntityNotFoundException;
 @RestControllerAdvice
 public class ExceptionHandlerController {
     @ExceptionHandler(CarIsBusyException.class)
-    public ResponseEntity<ErrorResponse> handleCarIsBusyException(CarIsBusyException exception){
+    public ResponseEntity<ErrorResponse> handleCarIsBusyException(CarIsBusyException exception) {
         log.warn("EXCEPTION: {}", exception.getMessage());
         return ResponseEntity.badRequest().body(new ErrorResponse(exception.getMessage()));
     }
+
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException exception){
+    public ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException exception) {
         log.warn("EXCEPTION: {}", exception.getMessage());
         return ResponseEntity.badRequest().body(new ErrorResponse(exception.getMessage()));
     }
+
     @ExceptionHandler(LoginNotUniqueException.class)
-    public ResponseEntity<ErrorResponse> handleLoginNotUniqueException(LoginNotUniqueException exception){
+    public ResponseEntity<ErrorResponse> handleLoginNotUniqueException(LoginNotUniqueException exception) {
         log.warn("EXCEPTION: {}", exception.getMessage());
         return ResponseEntity.badRequest().body(new ErrorResponse(exception.getMessage()));
     }
