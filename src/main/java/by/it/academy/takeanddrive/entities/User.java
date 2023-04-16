@@ -1,39 +1,39 @@
 package by.it.academy.takeanddrive.entities;
 
-import jakarta.persistence.*;
+import by.it.academy.takeanddrive.enums.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
+import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="USERS")
+@Builder
+@Table(name = "USERS")
+@DynamicInsert
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
-    private int id;
-    @Column(name = "FIRSTNAME")
+    private Integer id;
+    @Column(name = "FIRSTNAME", nullable = false, length = 50)
     private String firstName;
-    @Column(name = "LASTNAME")
+    @Column(name = "LASTNAME", nullable = false, length = 50)
     private String lastName;
-    @Column(name = "AGE")
-    private int age;
-    @Column(name = "LOGIN")
+    @Column(name = "AGE", nullable = false)
+    private Integer age;
+    @Column(name = "LOGIN", nullable = false, length = 100)
     private String login;
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false, length = 100)
     private String password;
     @Enumerated(EnumType.STRING)
     @Column(name = "ROLE")
     @ColumnDefault("USER")
     private Role role;
-
-    public User(String firstName, String lastName, int age, String login, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.login = login;
-        this.password = password;
-    }
 }
