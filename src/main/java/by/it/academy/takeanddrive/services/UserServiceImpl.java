@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Objects;
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
     public UserResponse getUserByLogin(String login) {
         return userRepository.findByLogin(login)
                 .map(userMapper::buildUserResponse)
-                .orElseThrow(() -> new EntityExistsException(String.format("User with login '%s' doesn't exist", login)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("User with login '%s' doesn't exist", login)));
     }
 
     @Override
