@@ -2,20 +2,32 @@ package by.it.academy.takeanddrive.mapper;
 
 import by.it.academy.takeanddrive.dto.RentalAgreementRequest;
 import by.it.academy.takeanddrive.dto.RentalAgreementResponse;
+import by.it.academy.takeanddrive.entities.Car;
 import by.it.academy.takeanddrive.entities.RentalAgreement;
+import by.it.academy.takeanddrive.entities.User;
+import by.it.academy.takeanddrive.repositories.CarRepository;
+import by.it.academy.takeanddrive.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 
 @Component
+@RequiredArgsConstructor
 public class RentalAgreementMapper {
+    private final UserRepository userRepository;
+    private final CarRepository carRepository;
+    private final UserMapper userMapper;
+    private final CarMapper carMapper;
+
     public RentalAgreementResponse buildRentalAgreementResponse(RentalAgreement rentalAgreement) {
         return RentalAgreementResponse.builder()
                 .agreementId(rentalAgreement.getAgreementId())
-                .user(rentalAgreement.getUser())
-                .car(rentalAgreement.getCar())
+                .user(userMapper.buildUserResponse(rentalAgreement.getUser()))
+                .car(carMapper.buildCarResponse(rentalAgreement.getCar()))
                 .rentalStart(rentalAgreement.getRentalStart())
                 .rentalEnd(rentalAgreement.getRentalEnd())
                 .rentalCost(rentalAgreement.getRentalCost())
@@ -23,14 +35,18 @@ public class RentalAgreementMapper {
     }
 
     public RentalAgreement buildRentalAgreement(RentalAgreementRequest rentalAgreementRequest) {
+        User client = userRepository.findByLogin(rentalAgreementRequest.getUserLogin())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Car carToRent = carRepository.findCarById(rentalAgreementRequest.getCarId())
+                .orElseThrow(() -> new EntityNotFoundException("Car not found"));
         return RentalAgreement.builder()
-                .user(rentalAgreementRequest.getUser())
-                .car(rentalAgreementRequest.getCar())
+                .user(client)
+                .car(carToRent)
                 .rentalStart(rentalAgreementRequest.getRentalStart())
                 .rentalEnd(rentalAgreementRequest.getRentalEnd())
                 .rentalCost(countRentalCost(rentalAgreementRequest.getRentalStart(),
                         rentalAgreementRequest.getRentalEnd(),
-                        rentalAgreementRequest.getCar().getRentalPrice()))
+                        carToRent.getRentalPrice()))
                 .build();
     }
 

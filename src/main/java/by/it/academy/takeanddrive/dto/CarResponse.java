@@ -1,6 +1,5 @@
 package by.it.academy.takeanddrive.dto;
 
-import by.it.academy.takeanddrive.entities.User;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,5 +13,5 @@ public class CarResponse {
     private String registrationNumber;
     private boolean busy;
     private BigDecimal rentalPrice;
-    private User user;
+    private UserResponse user;
 }

@@ -25,17 +25,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RentCarService implements RentService {
     private final RentalAgreementMapper rentalAgreementMapper;
-    private final CarRepository carRepository;
-    private final UserRepository userRepository;
     private final RentalAgreementRepository rentalAgreementRepository;
+    private final UserRepository userRepository;
+    private final CarRepository carRepository;
 
     @Override
     public RentalAgreementResponse makeRentalAgreement(RentalAgreementRequest rentalAgreementRequest) {
         RentalAgreement rentalAgreement = rentalAgreementMapper.buildRentalAgreement(rentalAgreementRequest);
         RentalAgreement newRentalAgreement = rentalAgreementRepository.save(rentalAgreement);
-        Integer carId = rentalAgreementRequest.getCar().getId();
-        String userLogin = rentalAgreementRequest.getUser().getLogin();
-        rentCarByUser(carId, userLogin);
+        rentCarByUser(rentalAgreementRequest.getCarId(), rentalAgreementRequest.getUserLogin());
         return rentalAgreementMapper.buildRentalAgreementResponse(newRentalAgreement);
     }
 
