@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 @Entity
 @Builder
 @Table(name = "CARS")
+@DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
 public class Car {

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Table(name = "USERS")
+@DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
